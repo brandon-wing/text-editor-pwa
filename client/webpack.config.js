@@ -15,14 +15,17 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+      //webpack plugin
       new HtmlWebpackPlugin({
         template: './index.html',
         title: 'JATE | Just Another Text Editor'
       }),
+      //handles creating the manifest.json in its desired directory
       new InjectManifest({
         swSrc: './src-sw.js',
         swDest: 'src-sw.js',
       }),
+      //all the requirements for the manifest
       new WebpackPwaManifest({
         inject: true,
         fingerprints: false,
@@ -44,6 +47,7 @@ module.exports = () => {
     ],
 
     module: {
+      //we need a CSS loader, and babel
       rules: [
         {
           test: /\.css$/i,
